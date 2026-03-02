@@ -54,7 +54,7 @@
             ourSpots: "Our Spots", est: "Est. 2022", brandNew: "Brand New",
             monSat: "MON - SAT:", sun: "SUNDAY:", soldOut: "* Or until sold out",
             call: "Call", map: "Map", connect: "Connect",
-            mainInsta: "Main Instagram", fmCc: "Fort Myers & Cape Coral",
+            instagram: "Instagram",
             fbPage: "Facebook Page", website: "Website",
             rights: "All Rights Reserved."
           },
@@ -84,7 +84,7 @@
             ourSpots: "Nuestros Locales", est: "Est. 2022", brandNew: "¡Nuevo!",
             monSat: "LUN - SÁB:", sun: "DOMINGO:", soldOut: "* O hasta agotar existencias",
             call: "Llamar", map: "Mapa", connect: "Conectar",
-            mainInsta: "Instagram Principal", fmCc: "Fort Myers y Cape Coral",
+            instagram: "Instagram",
             fbPage: "Página de Facebook", website: "Sitio Web",
             rights: "Todos los derechos reservados."
           }
@@ -456,11 +456,11 @@
                       <h3 class="text-center font-black uppercase tracking-widest text-zinc-400 mb-2">${t[lang].readyToOrder}</h3>
                       
                       <div class="flex flex-col gap-3">
-                        <a href="https://www.bignicksbbq.com" target="_blank" rel="noopener noreferrer" class="w-full bg-red-700 text-white py-4 px-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-red-600 transition shadow-lg border border-red-600">
+                        <a href="https://bignicksbbq.toast.site/order/big-nicks-barbecue-fm-9211-cypress-lake-drive" target="_blank" rel="noopener noreferrer" class="w-full bg-red-700 text-white py-4 px-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-red-600 transition shadow-lg border border-red-600">
                           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                           ${t[lang].orderToastFt}
                         </a>
-                        <a href="https://www.bignicksbbq.com" target="_blank" rel="noopener noreferrer" class="w-full bg-amber-600 text-zinc-950 py-4 px-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-amber-500 transition shadow-lg border border-amber-500">
+                        <a href="https://bignicksbbq.toast.site/order/big-nicks-barbecue-cape-coral" target="_blank" rel="noopener noreferrer" class="w-full bg-amber-600 text-zinc-950 py-4 px-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-amber-500 transition shadow-lg border border-amber-500">
                           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                           ${t[lang].orderToastCc}
                         </a>
@@ -582,35 +582,27 @@
                     <div>
                       ${buildSectionTitle(t[lang].connect, '<i data-lucide="share-2" class="inline mr-2 text-zinc-400"></i>')}
                       <div class="space-y-3">
-                        <a href="https://instagram.com/bignicksqq" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
-                          <i data-lucide="instagram" class="w-6 h-6 text-zinc-400 group-hover:text-pink-500 transition"></i>
-                          <div class="flex-1">
-                            <p class="font-bold text-white uppercase tracking-wider">@bignicksqq</p>
-                            <p class="text-xs text-zinc-400">${t[lang].mainInsta}</p>
-                          </div>
-                          <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
-                        </a>
-                        <a href="https://instagram.com/bignicksbbqfm" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
-                          <i data-lucide="instagram" class="w-6 h-6 text-zinc-400 group-hover:text-pink-500 transition"></i>
-                          <div class="flex-1">
-                            <p class="font-bold text-white uppercase tracking-wider">@bignicksbbqfm</p>
-                            <p class="text-xs text-zinc-400">${t[lang].fmCc}</p>
-                          </div>
-                          <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
-                        </a>
-                        <a href="https://facebook.com/bignicksbbqfm" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
-                          <i data-lucide="facebook" class="w-6 h-6 text-zinc-400 group-hover:text-blue-500 transition"></i>
-                          <div class="flex-1">
-                            <p class="font-bold text-white uppercase tracking-wider">Big Nick's BBQ</p>
-                            <p class="text-xs text-zinc-400">${t[lang].fbPage}</p>
-                          </div>
-                          <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
-                        </a>
-                        <a href="https://www.bignicksbbq.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
+                        <a href="https://www.bignicksbbq.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
                           <i data-lucide="globe" class="w-6 h-6 text-zinc-400 group-hover:text-white transition"></i>
                           <div class="flex-1">
                             <p class="font-bold text-white uppercase tracking-wider">${t[lang].website}</p>
                             <p class="text-xs text-zinc-400">bignicksbbq.com</p>
+                          </div>
+                          <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bignicksbbqfm/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
+                          <i data-lucide="instagram" class="w-6 h-6 text-zinc-400 group-hover:text-pink-500 transition"></i>
+                          <div class="flex-1">
+                            <p class="font-bold text-white uppercase tracking-wider">@bignicksbbqfm</p>
+                            <p class="text-xs text-zinc-400">${t[lang].instagram}</p>
+                          </div>
+                          <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
+                        </a>
+                        <a href="https://www.facebook.com/bignicksfortmyers" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition group">
+                          <i data-lucide="facebook" class="w-6 h-6 text-zinc-400 group-hover:text-blue-500 transition"></i>
+                          <div class="flex-1">
+                            <p class="font-bold text-white uppercase tracking-wider">Big Nick's BBQ</p>
+                            <p class="text-xs text-zinc-400">${t[lang].fbPage}</p>
                           </div>
                           <i data-lucide="external-link" class="w-4 h-4 text-zinc-600"></i>
                         </a>
