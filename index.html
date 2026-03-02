@@ -51,6 +51,7 @@
             fullService: "Full Service", fullServiceDesc: "We take care of the smoked meats, sides, and everything you need for a perfect feast.",
             fastResponse: "Fast Response", fastResponseDesc: "Fill out the request form and we'll get back to you with a proposal rapidly.",
             visitWeb: "Or visit our website to fill out the form.",
+            reqForm: "Fill Request Form",
             ourSpots: "Our Spots", est: "Est. 2022", brandNew: "Brand New",
             monSat: "MON - SAT:", sun: "SUNDAY:", soldOut: "* Or until sold out",
             call: "Call", map: "Map", connect: "Connect",
@@ -81,6 +82,7 @@
             fullService: "Servicio Completo", fullServiceDesc: "Nos encargamos de las carnes ahumadas, los acompañantes y todo lo necesario para un banquete perfecto.",
             fastResponse: "Respuesta Rápida", fastResponseDesc: "Llena el formulario de solicitud y nos comunicaremos contigo con una propuesta rápidamente.",
             visitWeb: "O visita nuestra web para llenar el formulario.",
+            reqForm: "Llenar Formulario",
             ourSpots: "Nuestros Locales", est: "Est. 2022", brandNew: "¡Nuevo!",
             monSat: "LUN - SÁB:", sun: "DOMINGO:", soldOut: "* O hasta agotar existencias",
             call: "Llamar", map: "Mapa", connect: "Conectar",
@@ -510,11 +512,19 @@
                         <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);"></div>
                         
                         <p class="text-zinc-300 font-bold uppercase tracking-widest mb-4 relative z-10">${t[lang].readyToOrder}</p>
-                        <a href="tel:2392042498" class="relative z-10 inline-flex items-center justify-center w-full bg-red-700 text-white py-4 px-6 font-black uppercase tracking-wider gap-2 hover:bg-red-600 transition shadow-lg mb-3">
-                          <i data-lucide="phone" class="w-6 h-6"></i>
-                          (239) 204-2498
-                        </a>
-                        <p class="text-sm text-zinc-500 mt-2 relative z-10">${t[lang].visitWeb}</p>
+                        
+                        <div class="relative z-10 flex flex-col gap-3">
+                          <a href="https://www.bignicksbbq.com/cateringrequestform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-amber-600 text-zinc-950 py-4 px-6 font-black uppercase tracking-wider gap-2 hover:bg-amber-500 transition shadow-lg">
+                            <i data-lucide="file-text" class="w-6 h-6"></i>
+                            ${t[lang].reqForm}
+                          </a>
+                          
+                          <a href="tel:2392042498" class="inline-flex items-center justify-center w-full bg-transparent border-2 border-zinc-700 text-white py-4 px-6 font-black uppercase tracking-wider gap-2 hover:bg-zinc-800 transition shadow-lg">
+                            <i data-lucide="phone" class="w-6 h-6"></i>
+                            (239) 204-2498
+                          </a>
+                        </div>
+
                       </div>
                     </div>
                   </div>
