@@ -210,14 +210,15 @@
         let videoError = false;
 
         // --- CONSTANTES DE VIDEO / FOTO ---
-        const USAR_VIDEO_DE_FONDO = true; 
+        const USAR_VIDEO_DE_FONDO = false; 
         const VIDEO_URL = "https://joy.videvo.net/videvo_files/video/free/2018-07/large_watermarked/180607_A_091_preview.mp4";
-        const FOTO_DE_FONDO_URL = "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80";
+        const FOTO_DE_FONDO_URL = "https://i.postimg.cc/nc59prxj/Captura_de_pantalla_2026_02_23_a_la(s)_11_29_09_a_m.png";
 
         // --- EVENT HANDLERS ---
         function setView(view) {
             currentView = view;
             render();
+            window.scrollTo(0, 0); // Vuelve arriba al cambiar de vista
         }
 
         function setLanguage(newLang) {
@@ -280,7 +281,7 @@
                 `<img src="${FOTO_DE_FONDO_URL}" alt="Slow Smoked BBQ" class="absolute inset-0 w-full h-full object-cover opacity-50" />`;
 
             return `
-                <div class="flex flex-col h-full bg-zinc-900 text-zinc-100">
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 min-h-screen">
                   
                   <div class="relative flex flex-col items-center justify-center pt-12 pb-10 px-6 border-b-4 border-red-700 min-h-[420px] overflow-hidden shadow-2xl">
                     
@@ -295,17 +296,12 @@
                     
                     <div class="relative z-10 flex flex-col items-center w-full">
                       
-                      <div class="bg-white rounded-full p-4 w-44 h-44 flex flex-col items-center justify-center border-4 border-zinc-900 shadow-[0_0_20px_rgba(0,0,0,0.8)] transform hover:scale-105 transition duration-300 mb-8 mt-4">
-                        <div class="absolute top-6 right-2 text-red-600 flex flex-col items-center rotate-12">
-                          <i data-lucide="star" class="w-4 h-4 text-current fill-current"></i>
-                          <span class="text-[6px] font-black -mt-1 tracking-tighter">ESTD</span>
-                          <span class="text-[6px] font-black -mt-1 tracking-tighter">2018</span>
-                        </div>
-                        
-                        <h1 class="text-4xl font-extrabold text-zinc-900 leading-none -rotate-6" style="font-family: cursive;">Big</h1>
-                        <h1 class="text-4xl font-extrabold text-zinc-900 leading-none -rotate-6 -mt-2" style="font-family: cursive;">Nick's</h1>
-                        <p class="text-red-700 font-black tracking-[0.15em] text-[9px] mt-2 border-t-2 border-zinc-900 pt-1">BARBECUE</p>
-                      </div>
+                      <!-- Logo Oficial -->
+                      <img 
+                        src="https://i.postimg.cc/RFCRrh1z/Chat_GPT_Image_Feb_23_2026_12_40_01_PM.png" 
+                        alt="Big Nick's BBQ Logo" 
+                        class="w-44 h-44 rounded-full border-4 border-zinc-900 shadow-[0_0_20px_rgba(0,0,0,0.8)] transform hover:scale-105 transition duration-300 mb-8 mt-4 object-cover bg-zinc-900" 
+                      />
 
                       <div class="text-center">
                         <h2 class="text-4xl font-black text-white uppercase tracking-wider leading-tight drop-shadow-lg">
@@ -325,7 +321,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-1 px-5 pt-8 pb-12 flex flex-col gap-4" style="background-image: url('https://www.transparenttextures.com/patterns/stardust.png');">
+                  <div class="flex-1 px-5 pt-8 pb-12 flex flex-col gap-4 w-full" style="background-image: url('https://www.transparenttextures.com/patterns/stardust.png');">
                     
                     <button onclick="setView('menu')" class="w-full bg-red-700 text-white p-5 shadow-lg flex items-center justify-between hover:bg-red-800 transition active:scale-95 border-l-4 border-red-400 group">
                       <div class="flex items-center gap-4">
@@ -365,9 +361,9 @@
 
         function buildAboutView() {
             return `
-                <div class="flex flex-col h-full bg-zinc-900 text-zinc-200 pb-12">
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-200 pb-12">
                   ${buildHeader(t[lang].ourStory)}
-                  <div class="overflow-y-auto">
+                  <div class="w-full">
                     <img src="https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?auto=format&fit=crop&q=80&w=800" alt="Restaurant Interior" class="w-full h-56 object-cover border-b-4 border-red-700" />
                     <div class="p-6 space-y-6">
                       ${buildSectionTitle(t[lang].aboutTitle, '')}
@@ -447,10 +443,10 @@
             }).join('');
 
             return `
-                <div class="flex flex-col h-full bg-zinc-950 text-zinc-100 pb-12">
+                <div class="flex flex-col w-full bg-zinc-950 text-zinc-100 pb-12">
                   ${buildHeader(t[lang].ourMenu)}
 
-                  <div class="px-3 py-6 overflow-y-auto">
+                  <div class="px-3 py-6 w-full">
                     <p class="text-xs text-center text-zinc-500 mb-6 font-bold tracking-widest uppercase">${t[lang].pricesChange}</p>
                     
                     ${menuHtml}
@@ -481,9 +477,9 @@
 
         function buildCateringView() {
             return `
-                <div class="flex flex-col h-full bg-zinc-900 text-zinc-100 pb-12">
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-12">
                   ${buildHeader(t[lang].catering)}
-                  <div class="overflow-y-auto">
+                  <div class="w-full">
                     <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=80" alt="BBQ Platter" class="w-full h-64 object-cover border-b-4 border-amber-600" />
                     <div class="p-6">
                       <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">${t[lang].caterTitle}</h2>
@@ -528,9 +524,9 @@
 
         function buildSocialView() {
             return `
-                <div class="flex flex-col h-full bg-zinc-900 text-zinc-100 pb-12">
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-12">
                   ${buildHeader(t[lang].locations)}
-                  <div class="px-4 py-6 overflow-y-auto space-y-8">
+                  <div class="px-4 py-6 space-y-8 w-full">
                     
                     <div>
                       ${buildSectionTitle(t[lang].ourSpots, '<i data-lucide="map-pin" class="inline mr-2 text-red-600"></i>')}
@@ -646,12 +642,12 @@
 
             return `
                 <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onclick="closeModal()">
-                  <div class="bg-zinc-900 border border-zinc-700 w-full max-w-sm overflow-hidden shadow-2xl relative animate-modal" onclick="event.stopPropagation()">
+                  <div class="bg-zinc-900 border border-zinc-700 w-full max-w-sm overflow-y-auto shadow-2xl relative animate-modal max-h-[95vh]" onclick="event.stopPropagation()">
                     <button onclick="closeModal()" class="absolute top-3 right-3 z-20 bg-black/60 p-1.5 rounded-full text-white hover:bg-red-600 transition">
                       <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                     
-                    <div class="h-56 w-full relative border-b-2 border-red-700">
+                    <div class="h-56 w-full relative border-b-2 border-red-700 flex-shrink-0">
                       <img src="${selectedItem.displayImage}" alt="${selectedItem.name[lang]}" class="w-full h-full object-cover" />
                       <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent"></div>
                     </div>
@@ -693,7 +689,7 @@
 
             root.innerHTML = `
                 <div class="w-full max-w-md bg-zinc-950 shadow-2xl relative overflow-x-hidden border-x border-zinc-900 flex flex-col min-h-screen mx-auto">
-                  <div class="flex-1 flex flex-col">
+                  <div class="flex-1 flex flex-col w-full">
                     ${content}
                   </div>
                   
