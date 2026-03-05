@@ -18,9 +18,21 @@
         .animate-modal {
             animation: fadeInZoom 0.2s ease-out forwards;
         }
+        /* Ocultar barra de desplazamiento en la navegación de etiquetas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Ajuste para el desplazamiento suave */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
-<body class="bg-black text-zinc-100 font-sans">
+<body class="bg-black text-zinc-100 font-sans overflow-x-hidden">
     
     <!-- Contenedor Principal de la App -->
     <div id="root"></div>
@@ -40,7 +52,6 @@
             aboutNew: "The family is growing! We are thrilled to announce our second location, newly opened in ",
             qualityTitle: "Our Quality",
             qualityText: "Our specialty is traditional BBQ. From juicy smoked Brisket and pulled Pork, to our famous St. Louis ribs. Everything is prepared with premium ingredients and the patience that true BBQ requires.",
-            pricesChange: "* Prices subject to change *",
             readyToOrder: "Ready to order?",
             orderToastFt: "Order Toast - Fort Myers",
             orderToastCc: "Order Toast - Cape Coral",
@@ -57,7 +68,8 @@
             call: "Call", map: "Map", connect: "Connect",
             instagram: "Instagram",
             fbPage: "Facebook Page", website: "Website",
-            rights: "All Rights Reserved."
+            rights: "All Rights Reserved.",
+            unavailable: "Currently Unavailable"
           },
           es: {
             ourMenu: "Nuestro Menú", ourStory: "Nuestra Historia", catering: "Catering", locations: "Ubicaciones e Info",
@@ -71,7 +83,6 @@
             aboutNew: "¡La familia crece! Estamos emocionados de anunciar nuestra segunda locación, recién inaugurada en ",
             qualityTitle: "Nuestra Calidad",
             qualityText: "Nuestra especialidad es el BBQ tradicional. Desde jugosos cortes de Brisket ahumado y Pork desmenuzado, hasta nuestras famosas costillas St. Louis. Todo se prepara con ingredientes premium y la paciencia que exige el verdadero BBQ.",
-            pricesChange: "* Precios sujetos a cambios *",
             readyToOrder: "¿Listo para ordenar?",
             orderToastFt: "Pedir Toast - Fort Myers",
             orderToastCc: "Pedir Toast - Cape Coral",
@@ -88,7 +99,8 @@
             call: "Llamar", map: "Mapa", connect: "Conectar",
             instagram: "Instagram",
             fbPage: "Página de Facebook", website: "Sitio Web",
-            rights: "Todos los derechos reservados."
+            rights: "Todos los derechos reservados.",
+            unavailable: "No Disponible"
           }
         };
 
@@ -96,19 +108,19 @@
         const menuData = [
           {
             category: { en: "BBQ", es: "BBQ (Ahumados)" },
-            image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80",
+            image: "https://i.postimg.cc/WpGb6rnV/IMG_2783.png",
             columns: { en: ["Sandwich [1 Side]", "Platter [2 Sides]"], es: ["Sándwich [1 Acomp.]", "Plato [2 Acomp.]"] },
             items: [
-              { name: { en: "Pork", es: "Pork (Cerdo)" }, desc: { en: "Slow-smoked pulled pork, perfectly tender with authentic Carolina flavor.", es: "Cerdo desmenuzado ahumado lentamente, perfectamente tierno con auténtico sabor de Carolina." }, prices: ["$11.49", "$16.49"], image: "" },
-              { name: { en: "Jalapeno Cheddar Smoked Sausage", es: "Salchicha Ahumada Jalapeño Cheddar" }, desc: { en: "Savory smoked sausage infused with spicy jalapeno and creamy cheddar cheese.", es: "Sabrosa salchicha ahumada con un toque de jalapeño picante y queso cheddar cremoso." }, prices: ["$12.49", "$16.49"], image: "" },
-              { name: { en: "Turkey", es: "Turkey (Pavo)" }, desc: { en: "Juicy, slow-smoked turkey breast sliced thin and piled high.", es: "Jugosa pechuga de pavo ahumada lentamente, cortada fina y apilada." }, prices: ["$12.49", "$16.49"], image: "" },
-              { name: { en: "Brisket", es: "Brisket (Pecho de Res)" }, desc: { en: "Our signature slow-smoked beef brisket, sliced tender with a perfect dark bark.", es: "Nuestro característico pecho de res ahumado lentamente, cortado tierno con una corteza oscura perfecta." }, prices: ["$14.49", "$22.49"], image: "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80" },
+              { name: { en: "Pork", es: "Pork (Cerdo)" }, desc: { en: "Slow-smoked pulled pork, perfectly tender with authentic Carolina flavor.", es: "Cerdo desmenuzado ahumado lentamente, perfectamente tierno con auténtico sabor de Carolina." }, prices: ["$11.49", "$16.49"], image: "https://i.postimg.cc/k4JwmPpV/Gemini_Generated_Image_i43dm4i43dm4i43d.png" },
+              { name: { en: "Jalapeno Cheddar Smoked Sausage", es: "Salchicha Ahumada Jalapeño Cheddar" }, desc: { en: "Savory smoked sausage infused with spicy jalapeno and creamy cheddar cheese.", es: "Sabrosa salchicha ahumada con un toque de jalapeño picante y queso cheddar cremoso." }, prices: ["$12.49", "$16.49"], image: "https://i.postimg.cc/QM88rJvR/IMG_2789.jpg" },
+              { name: { en: "Turkey", es: "Turkey (Pavo)" }, desc: { en: "Juicy, slow-smoked turkey breast sliced thin and piled high.", es: "Jugosa pechuga de pavo ahumada lentamente, cortada fina y apilada." }, prices: ["$12.49", "$16.49"], image: "https://i.postimg.cc/s29KqgKk/Gemini_Generated_Image_7f6wzb7f6wzb7f6w.png" },
+              { name: { en: "Brisket", es: "Brisket (Pecho de Res)" }, desc: { en: "Our signature slow-smoked beef brisket, sliced tender with a perfect dark bark.", es: "Nuestro característico pecho de res ahumado lentamente, cortado tierno con una corteza oscura perfecta." }, prices: ["$14.49", "$22.49"], image: "https://i.postimg.cc/B6mpZ7rM/Gemini_Generated_Image_uuwut6uuwut6uuwu.png" },
               { name: { en: "Brisket Burnt Ends", es: "Brisket Burnt Ends" }, desc: { en: "Caramelized, smoky, flavor-packed nuggets of brisket goodness.", es: "Trocitos de brisket caramelizados, ahumados y llenos de sabor intenso." }, prices: ["$15.99", "$23.49"], image: "" },
             ]
           },
           {
             category: { en: "St. Louis Spare Ribs", es: "Costillas St. Louis" },
-            image: "https://images.unsplash.com/photo-1593030668930-8130abedd2b0?auto=format&fit=crop&w=800&q=80",
+            image: "https://i.postimg.cc/XJMVVnwx/IMG_2784.png",
             subtitle: { en: "[2 Sides]", es: "[2 Acompañantes]" },
             items: [
               { name: { en: "Quarter Rack", es: "Cuarto de Rack" }, desc: { en: "A quarter rack of our tender, dry-rubbed and slow-smoked spare ribs.", es: "Un cuarto de rack de nuestras costillas de cerdo tiernas, sazonadas en seco y ahumadas lentamente." }, prices: ["$16.99"], image: "" },
@@ -117,37 +129,49 @@
             ]
           },
           {
+            category: { en: "Bulk BBQ", es: "BBQ Por Libra (Bulk)" },
+            image: "https://i.postimg.cc/WpGb6rnV/IMG_2783.png",
+            columns: { en: ["Half Pound", "One Pound"], es: ["Media Libra", "Una Libra"] },
+            items: [
+              { name: { en: "Pulled Pork", es: "Pork (Cerdo)" }, desc: { en: "Our signature slow-smoked pulled pork, perfect for family meals.", es: "Nuestro clásico cerdo desmenuzado ahumado, perfecto para compartir." }, prices: ["$8.49", "$15.99"], image: "" },
+              { name: { en: "Smoked Brisket", es: "Brisket Ahumado" }, desc: { en: "Tender, slow-smoked sliced beef brisket.", es: "Pecho de res tierno, en rodajas y ahumado lentamente." }, prices: ["$14.49", "$27.99"], image: "" },
+              { name: { en: "Smoked Turkey", es: "Pavo Ahumado" }, desc: { en: "Juicy smoked turkey breast.", es: "Jugosa pechuga de pavo ahumada." }, prices: ["$9.49", "$17.99"], image: "" },
+              { name: { en: "Jalapeno Cheddar Sausage", es: "Salchicha Jalapeño Cheddar" }, desc: { en: "Savory smoked sausage infused with spicy jalapeno and cheese.", es: "Sabrosa salchicha ahumada con jalapeño picante y queso." }, prices: ["$8.49", "$15.99"], image: "" },
+              { name: { en: "Ribs [Full Rack]", es: "Costillas [Rack Completo]" }, desc: { en: "A full rack of our signature St. Louis style spare ribs.", es: "Un rack completo de nuestras exclusivas costillas St. Louis." }, prices: ["-", "$31.99"], image: "" }
+            ]
+          },
+          {
             category: { en: "Smash-Burgers", es: "Smash-Burgers" },
-            image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800",
+            image: "https://i.postimg.cc/yNXnt8vq/Gemini_Generated_Image_c4oyg7c4oyg7c4oy.png",
             subtitle: { en: "[1 Side]", es: "[1 Acompañante]" },
             items: [
-              { name: { en: "Double Cheese", es: "Doble Queso" }, desc: { en: "Two smashed beef patties with melted cheese, served hot on a toasted bun.", es: "Dos patties de res aplastados con queso derretido, servidos calientes en pan tostado." }, prices: ["$13.49"], image: "https://images.unsplash.com/photo-1586190848861-f56b5d1b3333?auto=format&fit=crop&w=800&q=80" },
+              { name: { en: "Double Cheese", es: "Doble Queso" }, desc: { en: "Two smashed beef patties with melted cheese, served hot on a toasted bun.", es: "Dos patties de res aplastados con queso derretido, servidos calientes en pan tostado." }, prices: ["$13.49"], image: "" },
               { name: { en: "Single Cheese", es: "Queso Sencilla" }, desc: { en: "A classic single smashed beef patty with melted cheese on a toasted bun.", es: "Un patty clásico de res con queso derretido en pan tostado." }, prices: ["$11.49"], image: "" },
             ]
           },
           {
             category: { en: "Specialty Sandwiches", es: "Sándwiches Especiales" },
-            image: "https://images.unsplash.com/photo-1612871689353-cccf581d667b?auto=format&fit=crop&w=800&q=80",
+            image: "https://i.postimg.cc/V6KgsZxj/Gemini_Generated_Image_tv6882tv6882tv68.png",
             subtitle: { en: "[1 Side]", es: "[1 Acompañante]" },
             items: [
-              { name: { en: "Turkey Melt", es: "Turkey Melt" }, desc: { en: "Big Nicks smoked turkey with bacon, melted american cheese, served on a warm potato bun.", es: "Pavo ahumado con tocino, queso americano derretido, en pan de papa caliente." }, prices: ["$15.49"], image: "" },
-              { name: { en: "Prime Rib Dip", es: "Prime Rib Dip" }, desc: { en: "Big Nicks prime rib thinly sliced, melted swiss cheese, served with au jus on a toasted hoagie.", es: "Prime rib cortado fino, queso suizo derretido, servido con jugo en pan hoagie tostado." }, prices: ["$16.49"], image: "" },
-              { name: { en: "Pastrami Reuben", es: "Pastrami Reuben" }, desc: { en: "Corned beef with sauerkraut, melted swiss cheese and dressing on grilled rye.", es: "Corned beef con chucrut, queso suizo derretido y aderezo en pan de centeno a la parrilla." }, prices: ["$15.99"], image: "" }
+              { name: { en: "Turkey Melt", es: "Turkey Melt" }, desc: { en: "Big Nicks smoked turkey with bacon, melted american cheese, served on a warm potato bun.", es: "Pavo ahumado con tocino, queso americano derretido, en pan de papa caliente." }, prices: ["$15.49"], image: "https://i.postimg.cc/TwdQ6v41/Gemini_Generated_Image_fgxqafgxqafgxqaf.png" },
+              { name: { en: "Prime Rib Dip", es: "Prime Rib Dip" }, desc: { en: "Big Nicks prime rib thinly sliced, melted swiss cheese, served with au jus on a toasted hoagie.", es: "Prime rib cortado fino, queso suizo derretido, servido con jugo en pan hoagie tostado." }, prices: ["$16.49"], image: "", unavailable: true },
+              { name: { en: "Pastrami Reuben", es: "Pastrami Reuben" }, desc: { en: "Corned beef with sauerkraut, melted swiss cheese and dressing on grilled rye.", es: "Corned beef con chucrut, queso suizo derretido y aderezo en pan de centeno a la parrilla." }, prices: ["$15.99"], image: "", unavailable: true }
             ]
           },
           {
             category: { en: "Signatures & Plates", es: "Especialidades y Platos" },
-            image: "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=80",
+            image: "https://i.postimg.cc/Sx265GDF/IMG_2787.png",
             items: [
-              { name: { en: "Big Nick's Salad", es: "Ensalada Big Nick's" }, desc: { en: "Crisp greens topped with cucumbers, tomatoes, hard boiled egg, bacon and your choice of protein.", es: "Verduras crujientes con pepinos, tomates, huevo duro, tocino y tu elección de proteína ahumada." }, prices: ["$16.49"], image: "" },
-              { name: { en: "Brisket Eggroll", es: "Brisket Eggroll" }, desc: { en: "Pimento cheese rolled into a flour wrapper and deep fried.", es: "Queso pimiento envuelto en una tortilla de harina y frito hasta quedar crujiente." }, prices: ["$4.50"], image: "" },
-              { name: { en: "2 Meat Plate", es: "Plato de 2 Carnes" }, desc: { en: "Choose 2: Ribs, Brisket, Pork, Turkey or Jalapeno Cheddar Smoked Sausage. Includes 2 Sides.", es: "Elige 2: Costillas, Brisket, Cerdo, Pavo o Salchicha. Incluye 2 Acompañantes." }, prices: ["$22.99"], image: "" },
+              { name: { en: "Big Nick's Salad", es: "Ensalada Big Nick's" }, desc: { en: "Crisp greens topped with cucumbers, tomatoes, hard boiled egg, bacon and your choice of protein.", es: "Verduras crujientes con pepinos, tomates, huevo duro, tocino y tu elección de proteína ahumada." }, prices: ["$16.49"], image: "https://i.postimg.cc/vm5NRyXS/IMG_2788.png" },
+              { name: { en: "Brisket Eggroll", es: "Brisket Eggroll" }, desc: { en: "Pimento cheese rolled into a flour wrapper and deep fried.", es: "Queso pimiento envuelto en una tortilla de harina y frito hasta quedar crujiente." }, prices: ["$4.50"], image: "https://i.postimg.cc/QtFnbp5n/IMG_2780.png" },
+              { name: { en: "2 Meat Plate", es: "Plato de 2 Carnes" }, desc: { en: "Choose 2: Ribs, Brisket, Pork, Turkey or Jalapeno Cheddar Smoked Sausage. Includes 2 Sides.", es: "Elige 2: Costillas, Brisket, Cerdo, Pavo o Salchicha. Incluye 2 Acompañantes." }, prices: ["$24.99"], image: "https://i.postimg.cc/Sx265GDF/IMG_2787.png" },
               { name: { en: "Family Meal Pack [Feeds 6]", es: "Paquete Familiar [Para 6]" }, desc: { en: "Enjoy your choice of 2 meats, 3 sides, bread and a gallon of fresh brewed tea or lemonade.", es: "Disfruta 2 carnes, 3 acompañantes, pan y un galón de té recién hecho o limonada." }, prices: ["$79.99"], image: "" }
             ]
           },
           {
             category: { en: "Tacos [2]", es: "Tacos [2]" },
-            image: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&q=80&w=800",
+            image: "https://i.postimg.cc/zBx7D2sW/Gemini_Generated_Image_lyyjsclyyjsclyyj.png",
             subtitle: { en: "[1 Side] Flour tortillas, house made pico de gallo, shredded cheese and crema.", es: "[1 Acomp.] Tortillas de harina, pico de gallo casero, queso rallado y crema." },
             items: [
               { name: { en: "Pork", es: "Pork (Cerdo)" }, desc: { en: "Two soft flour tortillas loaded with smoked pulled pork, fresh pico de gallo, and crema.", es: "Dos tortillas cargadas con cerdo ahumado desmenuzado, pico de gallo fresco y crema." }, prices: ["$12.49"], image: "" },
@@ -156,7 +180,7 @@
           },
           {
             category: { en: "Smoked Wings", es: "Alitas Ahumadas" },
-            image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&q=80&w=800",
+            image: "https://i.postimg.cc/hjX3r9xw/IMG_2779.png",
             items: [
               { name: { en: "Each", es: "Unidad (Cada una)" }, desc: { en: "Our signature jumbo chicken wings, perfectly smoked and seasoned.", es: "Nuestras exclusivas alitas de pollo jumbo, perfectamente ahumadas y sazonadas." }, prices: ["$2.49"], image: "" },
               { name: { en: "5 Piece Platter w/ 2 Sides", es: "Plato de 5 Piezas con 2 Acomp." }, desc: { en: "Five of our famous smoked jumbo wings, served with your choice of two sides.", es: "Cinco de nuestras famosas alitas jumbo ahumadas, servidas con dos acompañantes." }, prices: ["$16.99"], image: "" },
@@ -165,25 +189,44 @@
             ]
           },
           {
+            category: { en: "Kids Meals", es: "Menú Infantil" },
+            image: "https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?auto=format&fit=crop&w=800&q=80",
+            subtitle: { en: "[1 Side] Meals for ages 10 & under.", es: "[1 Acomp.] Comidas para niños de 10 años o menos." },
+            items: [
+              { name: { en: "Kids Grilled Cheese", es: "Sándwich de Queso Fundido" }, desc: { en: "Classic melted cheese on toasted bread.", es: "Clásico queso derretido en pan tostado." }, prices: ["$7.49"], image: "" },
+              { name: { en: "Kids Pork", es: "Kids Pork (Cerdo)" }, desc: { en: "A kid-sized portion of our slow-smoked pulled pork.", es: "Una porción para niños de nuestro cerdo ahumado desmenuzado." }, prices: ["$8.49"], image: "" },
+              { name: { en: "Kids Turkey", es: "Kids Turkey (Pavo)" }, desc: { en: "A kid-sized portion of our juicy smoked turkey.", es: "Una porción para niños de nuestro jugoso pavo ahumado." }, prices: ["$8.99"], image: "" },
+              { name: { en: "Kids Brisket", es: "Kids Brisket" }, desc: { en: "A kid-sized portion of our tender smoked brisket.", es: "Una porción para niños de nuestro tierno brisket ahumado." }, prices: ["$8.99"], image: "" },
+              { name: { en: "Kids Ribs", es: "Kids Ribs (Costillas)" }, desc: { en: "Kid-friendly portion of our fall-off-the-bone ribs.", es: "Porción para niños de nuestras costillas que se deshacen en el hueso." }, prices: ["$8.99"], image: "" }
+            ]
+          },
+          {
             category: { en: "Sides", es: "Acompañantes" },
-            image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800",
+            image: "https://i.postimg.cc/bYMrS7G5/Gemini-Generated-Image-pcud8upcud8upcud.png",
             columns: { en: ["Serving", "Pint"], es: ["Porción", "Pinta"] },
             items: [
-              { name: { en: "Fried Okra, Waffle Fries, Tater Salad, Baked Beans, Coleslaw, Hushpuppies, Green Beans, Collard Greens", es: "Fried Okra, Waffle Fries, Tater Salad, Baked Beans, Coleslaw, Hushpuppies, Green Beans, Collard Greens" }, desc: { en: "Classic homemade southern sides to perfectly complement your BBQ.", es: "Acompañantes sureños caseros clásicos para complementar perfectamente tu BBQ." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Fried Okra", es: "Okra Frita" }, desc: { en: "Crispy southern-style fried okra.", es: "Okra frita crujiente al estilo sureño." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Waffle Fries", es: "Papas Waffle" }, desc: { en: "Golden and crispy waffle-cut fries.", es: "Papas fritas doradas y crujientes en corte waffle." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Tater Salad", es: "Ensalada de Papa" }, desc: { en: "Creamy, homemade potato salad.", es: "Ensalada de papa casera y cremosa." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Baked Beans", es: "Frijoles Horneados" }, desc: { en: "Sweet and savory slow-cooked baked beans.", es: "Frijoles horneados dulces y sabrosos de cocción lenta." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Coleslaw", es: "Ensalada de Col (Coleslaw)" }, desc: { en: "Fresh, crisp, and tangy homemade coleslaw.", es: "Ensalada de col casera fresca, crujiente y acidita." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Hushpuppies", es: "Hushpuppies" }, desc: { en: "Golden-fried savory cornmeal bites.", es: "Bocaditos de harina de maíz fritos y dorados." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Green Beans", es: "Vainitas (Green Beans)" }, desc: { en: "Tender green beans cooked southern style.", es: "Vainitas tiernas cocinadas al estilo sureño." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Collard Greens", es: "Hojas de Mostaza" }, desc: { en: "Traditional southern slow-simmered collard greens.", es: "Hojas de mostaza tradicionales sureñas a fuego lento." }, prices: ["$4.99", "$8.99"], image: "" },
               { name: { en: "Brisket Mac & Cheese", es: "Macarrones con Queso y Brisket" }, desc: { en: "Creamy, cheesy macaroni loaded with savory pieces of our smoked brisket.", es: "Macarrones cremosos con queso, cargados con sabrosos trozos de nuestro brisket ahumado." }, prices: ["$5.99", "$9.99"], image: "" }
             ]
           },
           {
             category: { en: "Desserts", es: "Postres" },
-            image: "https://images.unsplash.com/photo-1502004960551-dc67f7c24cb3?auto=format&fit=crop&q=80&w=800",
+            image: "https://i.postimg.cc/5tYYrfFs/Dibujo-sin-ti-tulo-(2).png",
             items: [
-              { name: { en: "Key Lime Pie", es: "Key Lime Pie" }, desc: { en: "A slice of sweet and tart classic Florida Key Lime pie with a graham cracker crust.", es: "Una porción de pastel de limón (Key Lime) clásico de Florida, dulce y ácido." }, prices: ["$6.99"], image: "" },
-              { name: { en: "Banana Pudding Pint", es: "Pinta de Pudín de Banana" }, desc: { en: "A whole pint of our rich, creamy banana pudding layered with vanilla wafers.", es: "Una pinta entera de nuestro rico y cremoso pudín de plátano en capas con galletas de vainilla." }, prices: ["$9.99"], image: "" }
+              { name: { en: "Key Lime Pie", es: "Key Lime Pie" }, desc: { en: "A slice of sweet and tart classic Florida Key Lime pie with a graham cracker crust.", es: "Una porción de pastel de limón (Key Lime) clásico de Florida, dulce y ácido." }, prices: ["$6.99"], image: "https://i.postimg.cc/tT0XX9hk/IMG_2785.png" },
+              { name: { en: "Banana Pudding Pint", es: "Pinta de Pudín de Banana" }, desc: { en: "A whole pint of our rich, creamy banana pudding layered with vanilla wafers.", es: "Una pinta entera de nuestro rico y cremoso pudín de plátano en capas con galletas de vainilla." }, prices: ["$9.99"], image: "https://i.postimg.cc/h4rpdyHn/IMG_2782.png" }
             ]
           },
           {
             category: { en: "Soft Drinks", es: "Refrescos y Bebidas" },
-            image: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=800&q=80",
+            image: "https://i.postimg.cc/DwjFXs0C/Gemini-Generated-Image-irl0qeirl0qeirl0.png",
             items: [
               { name: { en: "Fountain Drinks & Tea", es: "Refrescos de Máquina y Té" }, desc: { en: "Coke, Diet Coke, Sprite, Cheerwine, Barq's Root Beer, Lemonade, Sweet Tea, Unsweet Tea.", es: "Coke, Diet Coke, Sprite, Cheerwine, Barq's Root Beer, Limonada, Té Dulce, Té sin endulzar." }, prices: ["$2.49"], image: "" },
               { name: { en: "Gallon Fresh Brewed Tea", es: "Galón de Té Recién Hecho" }, desc: { en: "A full gallon of our freshly brewed sweet or unsweetened tea.", es: "Un galón entero de nuestro té recién hecho, dulce o sin endulzar." }, prices: ["$5.99"], image: "" }
@@ -191,7 +234,7 @@
           },
           {
             category: { en: "Alcoholic Beverages", es: "Bebidas Alcohólicas" },
-            image: "https://images.unsplash.com/photo-1538593704904-453086eb2d56?auto=format&fit=crop&w=800&q=80",
+            image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&w=800&q=80",
             items: [
               { name: { en: "Michelob Ultra", es: "Michelob Ultra" }, desc: { en: "Crisp and refreshing light beer.", es: "Cerveza ligera crujiente y refrescante." }, prices: ["$4.99"], image: "" },
               { name: { en: "Mango Cart", es: "Mango Cart" }, desc: { en: "A light wheat ale bursting with fresh mango flavor.", es: "Una cerveza de trigo ligera que explota con sabor a mango fresco." }, prices: ["$5.99"], image: "" },
@@ -236,6 +279,10 @@
         function openModal(catIdx, itemIdx) {
             const section = menuData[catIdx];
             const item = section.items[itemIdx];
+            
+            // Si el item no está disponible, no abrir el modal
+            if (item.unavailable) return;
+
             selectedItem = {
                 ...item,
                 displayImage: item.image ? item.image : section.image,
@@ -249,10 +296,22 @@
             render();
         }
 
+        function scrollToCategory(idx) {
+            const el = document.getElementById(`category-${idx}`);
+            if (el) {
+                // Ajuste para el margen superior del header combinado (~115px)
+                const y = el.getBoundingClientRect().top + window.scrollY - 120;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }
+
         // --- COMPONENT BUILDERS ---
-        function buildHeader(title) {
+        
+        // Modificado para recibir un parámetro "isSticky" y permitir agruparlo
+        function buildHeader(title, isSticky = true) {
+            const stickyClass = isSticky ? "sticky top-0 z-40" : "";
             return `
-                <div class="sticky top-0 bg-zinc-950 shadow-md border-b-2 border-red-700 z-30 px-4 py-4 flex items-center justify-between">
+                <div class="${stickyClass} bg-zinc-950 shadow-md border-b-2 border-red-700 px-4 py-4 flex items-center justify-between">
                   <div class="flex items-center flex-1">
                     <button onclick="setView('home')" class="p-2 -ml-2 rounded hover:bg-zinc-800 text-zinc-100 transition active:scale-90">
                       <i data-lucide="chevron-left" class="w-7 h-7"></i>
@@ -393,6 +452,20 @@
         }
 
         function buildMenuView() {
+            // Generar las etiquetas de navegación superior
+            const tagsHtml = menuData.map((section, idx) => `
+                <button onclick="scrollToCategory(${idx})" class="flex-shrink-0 bg-zinc-800 hover:bg-red-700 text-zinc-300 hover:text-white px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-700 transition shadow-md">
+                    ${section.category[lang]}
+                </button>
+            `).join('');
+
+            const navBarHtml = `
+                <div class="bg-zinc-950/95 backdrop-blur-md border-b border-red-900/50 py-3 px-3 overflow-x-auto hide-scrollbar flex gap-2">
+                    ${tagsHtml}
+                </div>
+            `;
+
+            // Generar el contenido del menú
             const menuHtml = menuData.map((section, idx) => {
                 let columnsHtml = '';
                 if (section.columns) {
@@ -408,6 +481,23 @@
                     const pricesHtml = item.prices.map(price => `<span class="w-20 text-right font-black text-red-500">${price}</span>`).join('');
                     const descHtml = item.desc ? `<span class="text-sm text-zinc-400 mt-1.5 font-medium leading-snug block normal-case">${item.desc[lang]}</span>` : '';
                     
+                    // Si el producto no está disponible, mostrarlo en gris y con etiqueta
+                    if (item.unavailable) {
+                        const badgeHtml = `<span class="inline-block bg-zinc-800 text-red-500 text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-black border border-red-900/50 mt-1">${t[lang].unavailable}</span>`;
+                        return `
+                            <div class="px-2 py-4 flex justify-between items-start opacity-40 grayscale cursor-not-allowed group">
+                              <div class="flex-1 pr-4">
+                                <span class="font-black text-zinc-200 leading-snug uppercase block">${item.name[lang]}</span>
+                                ${badgeHtml}
+                                ${descHtml}
+                              </div>
+                              <div class="flex gap-3 shrink-0 items-start mt-0.5">
+                                ${pricesHtml}
+                              </div>
+                            </div>
+                        `;
+                    }
+
                     return `
                         <div onclick="openModal(${idx}, ${itemIdx})" class="px-2 py-4 flex justify-between items-start hover:bg-zinc-800/60 transition group cursor-pointer">
                           <div class="flex-1 pr-4">
@@ -424,7 +514,7 @@
                 const subtitleHtml = section.subtitle ? `<p class="text-red-200 text-xs font-bold uppercase tracking-widest mt-1 leading-snug opacity-90">${section.subtitle[lang]}</p>` : '';
 
                 return `
-                    <div class="mb-10 border-2 border-zinc-800 bg-zinc-900 shadow-2xl">
+                    <div id="category-${idx}" class="mb-10 border-2 border-zinc-800 bg-zinc-900 shadow-2xl scroll-mt-32">
                         <div class="relative h-48 w-full border-b-2 border-red-700 bg-zinc-800">
                            <img src="${section.image}" alt="${section.category[lang]}" class="absolute inset-0 w-full h-full object-cover" />
                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent"></div>
@@ -445,12 +535,15 @@
             }).join('');
 
             return `
-                <div class="flex flex-col w-full bg-zinc-950 text-zinc-100 pb-12">
-                  ${buildHeader(t[lang].ourMenu)}
+                <div class="flex flex-col w-full bg-zinc-950 text-zinc-100 pb-12 relative">
+                  
+                  <!-- Contenedor estático que une el encabezado y las etiquetas -->
+                  <div class="sticky top-0 z-40 w-full flex flex-col shadow-xl bg-zinc-950">
+                    ${buildHeader(t[lang].ourMenu, false)}
+                    ${navBarHtml}
+                  </div>
 
-                  <div class="px-3 py-6 w-full">
-                    <p class="text-xs text-center text-zinc-500 mb-6 font-bold tracking-widest uppercase">${t[lang].pricesChange}</p>
-                    
+                  <div class="px-3 pt-4 pb-6 w-full">
                     ${menuHtml}
 
                     <div class="mt-8 mb-8 px-2 space-y-4">
@@ -689,8 +782,9 @@
 
             const currentYear = new Date().getFullYear();
 
+            // NOTA: Se eliminó el "overflow-x-hidden" de este div para que el sticky funcione correctamente.
             root.innerHTML = `
-                <div class="w-full max-w-md bg-zinc-950 shadow-2xl relative overflow-x-hidden border-x border-zinc-900 flex flex-col min-h-screen mx-auto">
+                <div class="w-full max-w-md bg-zinc-950 shadow-2xl relative border-x border-zinc-900 flex flex-col min-h-screen mx-auto">
                   <div class="flex-1 flex flex-col w-full">
                     ${content}
                   </div>
