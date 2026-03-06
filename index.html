@@ -1,9 +1,10 @@
-<!-- actualizacion al 03/05/2026 12:40pm -->
+<!-- actualizacion al 03/05/2026 10:14pm -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Viewport adaptado para comportarse como App Nativa -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Big Nick's BBQ</title>
     <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,6 +12,30 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
+        /* Reglas para evitar el rebote en iOS y comportarse como App */
+        body {
+            overscroll-behavior-y: none; 
+            background-color: #09090b; /* zinc-950 */
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Padding seguro para los iPhones sin botón de inicio */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+        
+        /* Ocultar barra de desplazamiento para que luzca limpio */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* Animación para la ventana flotante (Modal) */
         @keyframes fadeInZoom {
             from { opacity: 0; transform: scale(0.95); }
@@ -19,21 +44,9 @@
         .animate-modal {
             animation: fadeInZoom 0.2s ease-out forwards;
         }
-        /* Ocultar barra de desplazamiento en la navegación de etiquetas */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        /* Ajuste para el desplazamiento suave */
-        html {
-            scroll-behavior: smooth;
-        }
     </style>
 </head>
-<body class="bg-black text-zinc-100 font-sans overflow-x-hidden">
+<body class="text-zinc-100 font-sans">
     
     <!-- Contenedor Principal de la App -->
     <div id="root"></div>
@@ -53,6 +66,7 @@
             aboutNew: "The family is growing! We are thrilled to announce our second location, newly opened in ",
             qualityTitle: "Our Quality",
             qualityText: "Our specialty is traditional BBQ. From juicy smoked Brisket and pulled Pork, to our famous St. Louis ribs. Everything is prepared with premium ingredients and the patience that true BBQ requires.",
+            pricesChange: "* Prices subject to change *",
             readyToOrder: "Ready to order?",
             orderToastFt: "Order Toast - Fort Myers",
             orderToastCc: "Order Toast - Cape Coral",
@@ -69,8 +83,7 @@
             call: "Call", map: "Map", connect: "Connect",
             instagram: "Instagram",
             fbPage: "Facebook Page", website: "Website",
-            rights: "All Rights Reserved.",
-            unavailable: "Currently Unavailable"
+            rights: "All Rights Reserved."
           },
           es: {
             ourMenu: "Nuestro Menú", ourStory: "Nuestra Historia", catering: "Catering", locations: "Ubicaciones e Info",
@@ -84,6 +97,7 @@
             aboutNew: "¡La familia crece! Estamos emocionados de anunciar nuestra segunda locación, recién inaugurada en ",
             qualityTitle: "Nuestra Calidad",
             qualityText: "Nuestra especialidad es el BBQ tradicional. Desde jugosos cortes de Brisket ahumado y Pork desmenuzado, hasta nuestras famosas costillas St. Louis. Todo se prepara con ingredientes premium y la paciencia que exige el verdadero BBQ.",
+            pricesChange: "* Precios sujetos a cambios *",
             readyToOrder: "¿Listo para ordenar?",
             orderToastFt: "Pedir Toast - Fort Myers",
             orderToastCc: "Pedir Toast - Cape Coral",
@@ -100,8 +114,7 @@
             call: "Llamar", map: "Mapa", connect: "Conectar",
             instagram: "Instagram",
             fbPage: "Página de Facebook", website: "Sitio Web",
-            rights: "Todos los derechos reservados.",
-            unavailable: "No Disponible"
+            rights: "Todos los derechos reservados."
           }
         };
 
@@ -156,8 +169,8 @@
             subtitle: { en: "[1 Side]", es: "[1 Acompañante]" },
             items: [
               { name: { en: "Turkey Melt", es: "Turkey Melt" }, desc: { en: "Big Nicks smoked turkey with bacon, melted american cheese, served on a warm potato bun.", es: "Pavo ahumado con tocino, queso americano derretido, en pan de papa caliente." }, prices: ["$15.49"], image: "https://i.postimg.cc/TwdQ6v41/Gemini_Generated_Image_fgxqafgxqafgxqaf.png" },
-              { name: { en: "Prime Rib Dip", es: "Prime Rib Dip" }, desc: { en: "Big Nicks prime rib thinly sliced, melted swiss cheese, served with au jus on a toasted hoagie.", es: "Prime rib cortado fino, queso suizo derretido, servido con jugo en pan hoagie tostado." }, prices: ["$16.49"], image: "", unavailable: true },
-              { name: { en: "Pastrami Reuben", es: "Pastrami Reuben" }, desc: { en: "Corned beef with sauerkraut, melted swiss cheese and dressing on grilled rye.", es: "Corned beef con chucrut, queso suizo derretido y aderezo en pan de centeno a la parrilla." }, prices: ["$15.99"], image: "", unavailable: true }
+              { name: { en: "Prime Rib Special", es: "Prime Rib Special" }, desc: { en: "Big Nicks prime rib thinly sliced, melted swiss cheese, served with au jus on a toasted hoagie.", es: "Prime rib cortado fino, queso suizo derretido, servido con jugo en pan hoagie tostado." }, prices: ["$16.49"], image: "", unavailable: true },
+              { name: { en: "Reuben Special", es: "Reuben Special" }, desc: { en: "Corned beef with sauerkraut, melted swiss cheese and dressing on grilled rye.", es: "Corned beef con chucrut, queso suizo derretido y aderezo en pan de centeno a la parrilla." }, prices: ["$15.99"], image: "", unavailable: true }
             ]
           },
           {
@@ -208,10 +221,10 @@
             items: [
               { name: { en: "Fried Okra", es: "Okra Frita" }, desc: { en: "Crispy southern-style fried okra.", es: "Okra frita crujiente al estilo sureño." }, prices: ["$4.99", "$8.99"], image: "" },
               { name: { en: "Waffle Fries", es: "Papas Waffle" }, desc: { en: "Golden and crispy waffle-cut fries.", es: "Papas fritas doradas y crujientes en corte waffle." }, prices: ["$4.99", "$8.99"], image: "" },
-              { name: { en: "Tater Salad", es: "Ensalada de Papa" }, desc: { en: "Creamy, homemade potato salad.", es: "Ensalada de papa casera y cremosa." }, prices: ["$4.99", "$8.99"], image: "" },
-              { name: { en: "Baked Beans", es: "Frijoles Horneados" }, desc: { en: "Sweet and savory slow-cooked baked beans.", es: "Frijoles horneados dulces y sabrosos de cocción lenta." }, prices: ["$4.99", "$8.99"], image: "" },
-              { name: { en: "Coleslaw", es: "Ensalada de Col (Coleslaw)" }, desc: { en: "Fresh, crisp, and tangy homemade coleslaw.", es: "Ensalada de col casera fresca, crujiente y acidita." }, prices: ["$4.99", "$8.99"], image: "" },
-              { name: { en: "Hushpuppies", es: "Hushpuppies" }, desc: { en: "Golden-fried savory cornmeal bites.", es: "Bocaditos de harina de maíz fritos y dorados." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Tater Salad", es: "Ensalada de Papa" }, desc: { en: "Creamy, homestyle potato salad.", es: "Ensalada de papa casera y cremosa." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Baked Beans", es: "Frijoles Horneados" }, desc: { en: "Sweet and savory baked beans.", es: "Frijoles horneados agridulces." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Coleslaw", es: "Ensalada de Col" }, desc: { en: "Fresh and crisp homemade coleslaw.", es: "Ensalada de col casera, fresca y crujiente." }, prices: ["$4.99", "$8.99"], image: "" },
+              { name: { en: "Hushpuppies", es: "Hushpuppies" }, desc: { en: "Golden-fried savory cornmeal batter.", es: "Masa de maíz frita y dorada." }, prices: ["$4.99", "$8.99"], image: "" },
               { name: { en: "Green Beans", es: "Vainitas (Green Beans)" }, desc: { en: "Tender green beans cooked southern style.", es: "Vainitas tiernas cocinadas al estilo sureño." }, prices: ["$4.99", "$8.99"], image: "" },
               { name: { en: "Collard Greens", es: "Hojas de Mostaza" }, desc: { en: "Traditional southern slow-simmered collard greens.", es: "Hojas de mostaza tradicionales sureñas a fuego lento." }, prices: ["$4.99", "$8.99"], image: "" },
               { name: { en: "Brisket Mac & Cheese", es: "Macarrones con Queso y Brisket" }, desc: { en: "Creamy, cheesy macaroni loaded with savory pieces of our smoked brisket.", es: "Macarrones cremosos con queso, cargados con sabrosos trozos de nuestro brisket ahumado." }, prices: ["$5.99", "$9.99"], image: "" }
@@ -255,7 +268,6 @@
         let selectedItem = null;
         let videoError = false;
 
-        // --- CONSTANTES DE VIDEO / FOTO ---
         const USAR_VIDEO_DE_FONDO = false; 
         const VIDEO_URL = "https://joy.videvo.net/videvo_files/video/free/2018-07/large_watermarked/180607_A_091_preview.mp4";
         const FOTO_DE_FONDO_URL = "https://i.postimg.cc/nc59prxj/Captura_de_pantalla_2026_02_23_a_la(s)_11_29_09_a_m.png";
@@ -263,8 +275,17 @@
         // --- EVENT HANDLERS ---
         function setView(view) {
             currentView = view;
+            selectedItem = null;
             render();
-            window.scrollTo(0, 0); // Vuelve arriba al cambiar de vista
+            const scrollContainer = document.getElementById('main-scroll');
+            if(scrollContainer) scrollContainer.scrollTop = 0;
+        }
+
+        function scrollToCategory(idx) {
+            const el = document.getElementById(`category-${idx}`);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function setLanguage(newLang) {
@@ -277,58 +298,63 @@
             render();
         }
 
+        // NUEVO openModal: Solo manipula el DOM
         function openModal(catIdx, itemIdx) {
             const section = menuData[catIdx];
             const item = section.items[itemIdx];
             
-            // Si el item no está disponible, no abrir el modal
-            if (item.unavailable) return;
+            document.getElementById('modal-img').src = item.image ? item.image : section.image;
+            document.getElementById('modal-img').alt = item.name[lang];
+            document.getElementById('modal-title').innerText = item.name[lang];
+            
+            const descEl = document.getElementById('modal-desc');
+            if (item.desc) {
+                descEl.innerHTML = `<p class="text-zinc-300 text-sm mb-6 leading-relaxed font-medium">${item.desc[lang]}</p>`;
+            } else {
+                descEl.innerHTML = '';
+            }
 
-            selectedItem = {
-                ...item,
-                displayImage: item.image ? item.image : section.image,
-                columns: section.columns
-            };
-            render();
+            const pricesEl = document.getElementById('modal-prices');
+            pricesEl.innerHTML = item.prices.map((price, idx) => {
+                let label = section.columns ? section.columns[lang][idx] : 'Price / Precio';
+                label = label.replace('[', '').replace(']', ''); 
+                return `
+                    <div class="flex justify-between items-center bg-zinc-950 p-3 border border-zinc-800">
+                      <span class="text-zinc-500 font-bold uppercase tracking-widest text-xs pr-4 whitespace-pre-line">
+                        ${label}
+                      </span>
+                      <span class="text-red-500 font-black text-xl">${price}</span>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('modal-back-btn').innerText = t[lang].backToMenu;
+
+            const modalEl = document.getElementById('item-modal');
+            modalEl.classList.remove('hidden');
+            modalEl.classList.add('flex');
         }
 
+        // NUEVO closeModal: Solo oculta el Modal
         function closeModal() {
-            selectedItem = null;
-            render();
+            const modalEl = document.getElementById('item-modal');
+            modalEl.classList.add('hidden');
+            modalEl.classList.remove('flex');
         }
 
-        function scrollToCategory(idx) {
-            const el = document.getElementById(`category-${idx}`);
-            if (el) {
-                // Ajuste para el margen superior del header combinado (~115px)
-                const y = el.getBoundingClientRect().top + window.scrollY - 120;
-                window.scrollTo({ top: y, behavior: 'smooth' });
+        // --- DEVUELVE EL TÍTULO PARA LA CABECERA ---
+        function getHeaderTitle() {
+            switch (currentView) {
+                case 'home': return "BIG NICK'S BBQ";
+                case 'menu': return t[lang].ourMenu;
+                case 'about': return t[lang].ourStory;
+                case 'catering': return t[lang].catering;
+                case 'social': return t[lang].locations;
+                default: return "BIG NICK'S BBQ";
             }
         }
 
-        // --- COMPONENT BUILDERS ---
-        
-        // Modificado para recibir un parámetro "isSticky" y permitir agruparlo
-        function buildHeader(title, isSticky = true) {
-            const stickyClass = isSticky ? "sticky top-0 z-40" : "";
-            return `
-                <div class="${stickyClass} bg-zinc-950 shadow-md border-b-2 border-red-700 px-4 py-4 flex items-center justify-between">
-                  <div class="flex items-center flex-1">
-                    <button onclick="setView('home')" class="p-2 -ml-2 rounded hover:bg-zinc-800 text-zinc-100 transition active:scale-90">
-                      <i data-lucide="chevron-left" class="w-7 h-7"></i>
-                    </button>
-                    <h1 class="text-xl font-black text-zinc-100 ml-2 tracking-widest uppercase">${title}</h1>
-                  </div>
-                  
-                  <!-- Botón de Idioma en Cabecera -->
-                  <div class="flex bg-zinc-900 border border-zinc-700 rounded-full overflow-hidden shadow-inner">
-                    <button onclick="setLanguage('en')" class="px-2 py-1 text-[10px] font-black tracking-widest transition ${lang === 'en' ? 'bg-red-700 text-white' : 'text-zinc-500'}">EN</button>
-                    <button onclick="setLanguage('es')" class="px-2 py-1 text-[10px] font-black tracking-widest transition ${lang === 'es' ? 'bg-amber-600 text-zinc-900' : 'text-zinc-500'}">ES</button>
-                  </div>
-                </div>
-            `;
-        }
-
+        // --- COMPONENTES VISUALES ---
         function buildSectionTitle(text, iconStr) {
             return `
                 <h2 class="text-2xl font-black text-zinc-100 mb-4 uppercase tracking-wider flex items-center gap-2 border-b border-zinc-800 pb-2">
@@ -337,40 +363,28 @@
             `;
         }
 
+        // VISTA INICIO
         function buildHomeView() {
             const bgElement = (USAR_VIDEO_DE_FONDO && !videoError) ? 
                 `<video src="${VIDEO_URL}" poster="${FOTO_DE_FONDO_URL}" autoplay loop muted playsinline onerror="handleVideoError()" class="absolute inset-0 w-full h-full object-cover opacity-60"></video>` :
                 `<img src="${FOTO_DE_FONDO_URL}" alt="Slow Smoked BBQ" class="absolute inset-0 w-full h-full object-cover opacity-50" />`;
 
             return `
-                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 min-h-screen">
-                  
-                  <div class="relative flex flex-col items-center justify-center pt-12 pb-10 px-6 border-b-4 border-red-700 min-h-[420px] overflow-hidden shadow-2xl">
-                    
-                    <div class="absolute top-4 right-4 z-40 flex bg-zinc-950/80 backdrop-blur-md border border-zinc-700 rounded-full overflow-hidden shadow-xl">
-                      <button onclick="setLanguage('en')" class="px-3 py-1.5 text-xs font-black tracking-widest transition ${lang === 'en' ? 'bg-red-700 text-white' : 'text-zinc-500 hover:text-white'}">EN</button>
-                      <button onclick="setLanguage('es')" class="px-3 py-1.5 text-xs font-black tracking-widest transition ${lang === 'es' ? 'bg-amber-600 text-zinc-900' : 'text-zinc-500 hover:text-white'}">ES</button>
-                    </div>
-
+                <div class="relative flex flex-col items-center justify-center min-h-full px-6 overflow-hidden">
                     ${bgElement}
-
                     <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-900/60 to-zinc-950/90 pointer-events-none"></div>
                     
-                    <div class="relative z-10 flex flex-col items-center w-full">
-                      
-                      <!-- Logo Oficial -->
+                    <div class="relative z-10 flex flex-col items-center w-full mt-auto mb-auto py-12">
                       <img 
                         src="https://i.postimg.cc/gc7DMf5t/Logo-Big-Nicks-Redondo-Sin-Fondo.png" 
                         alt="Big Nick's BBQ Logo" 
-                        class="w-44 h-44 rounded-full border-4 border-zinc-900 shadow-[0_0_20px_rgba(0,0,0,0.8)] transform hover:scale-105 transition duration-300 mb-8 mt-4 object-cover bg-zinc-900" 
+                        class="w-48 h-48 rounded-full border-4 border-zinc-900 shadow-[0_0_20px_rgba(0,0,0,0.8)] transform hover:scale-105 transition duration-300 mb-8 object-cover bg-zinc-900" 
                       />
-
                       <div class="text-center">
                         <h2 class="text-4xl font-black text-white uppercase tracking-wider leading-tight drop-shadow-lg">
                           ${t[lang].slogan1}<br/>
                           <span class="text-red-500">${t[lang].slogan2}</span>
                         </h2>
-                        
                         <div class="inline-flex items-center justify-center gap-2 mt-5 bg-zinc-950/60 py-1.5 px-4 rounded-full border border-zinc-700/50 backdrop-blur-sm shadow-xl">
                           <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-500"></i>
                           <p class="text-zinc-200 text-[10px] font-black tracking-[0.2em] uppercase drop-shadow">
@@ -380,51 +394,19 @@
                         </div>
                       </div>
 
+                      <button onclick="setView('menu')" class="mt-12 w-full max-w-[250px] bg-red-700 text-white py-4 px-6 rounded-full font-black uppercase tracking-widest shadow-[0_0_15px_rgba(220,38,38,0.5)] hover:bg-red-600 transition flex items-center justify-center gap-3 active:scale-95 cursor-pointer touch-manipulation">
+                          <i data-lucide="utensils" class="w-5 h-5 pointer-events-none"></i>
+                          <span class="pointer-events-none">${lang === 'en' ? 'View Menu' : 'Ver Menú'}</span>
+                      </button>
                     </div>
-                  </div>
-
-                  <div class="flex-1 px-5 pt-8 pb-12 flex flex-col gap-4 w-full" style="background-image: url('https://www.transparenttextures.com/patterns/stardust.png');">
-                    
-                    <button onclick="setView('menu')" class="w-full bg-red-700 text-white p-5 shadow-lg flex items-center justify-between hover:bg-red-800 transition active:scale-95 border-l-4 border-red-400 group">
-                      <div class="flex items-center gap-4">
-                        <i data-lucide="utensils" class="w-7 h-7 text-red-300 group-hover:animate-pulse"></i>
-                        <span class="text-xl font-black uppercase tracking-wider">${t[lang].ourMenu}</span>
-                      </div>
-                      <i data-lucide="chevron-right" class="w-6 h-6 text-white/70"></i>
-                    </button>
-
-                    <button onclick="setView('about')" class="w-full bg-zinc-800 text-zinc-100 p-5 shadow-lg flex items-center justify-between hover:bg-zinc-700 transition active:scale-95 border-l-4 border-zinc-500 group">
-                      <div class="flex items-center gap-4">
-                        <i data-lucide="flame" class="w-7 h-7 text-zinc-400 group-hover:text-red-400 transition"></i>
-                        <span class="text-xl font-bold uppercase tracking-wider">${t[lang].ourStory}</span>
-                      </div>
-                      <i data-lucide="chevron-right" class="w-6 h-6 text-zinc-500"></i>
-                    </button>
-
-                    <button onclick="setView('catering')" class="w-full bg-zinc-800 text-zinc-100 p-5 shadow-lg flex items-center justify-between hover:bg-zinc-700 transition active:scale-95 border-l-4 border-amber-600">
-                      <div class="flex items-center gap-4">
-                        <i data-lucide="truck" class="w-7 h-7 text-amber-500"></i>
-                        <span class="text-xl font-bold uppercase tracking-wider">${t[lang].catering}</span>
-                      </div>
-                      <i data-lucide="chevron-right" class="w-6 h-6 text-zinc-500"></i>
-                    </button>
-
-                    <button onclick="setView('social')" class="w-full bg-zinc-800 text-zinc-100 p-5 shadow-lg flex items-center justify-between hover:bg-zinc-700 transition active:scale-95 border-l-4 border-blue-500">
-                      <div class="flex items-center gap-4">
-                        <i data-lucide="map-pin" class="w-7 h-7 text-blue-400"></i>
-                        <span class="text-xl font-bold uppercase tracking-wider">${t[lang].locations}</span>
-                      </div>
-                      <i data-lucide="chevron-right" class="w-6 h-6 text-zinc-500"></i>
-                    </button>
-                  </div>
                 </div>
             `;
         }
 
+        // VISTA HISTORIA
         function buildAboutView() {
             return `
-                <div class="flex flex-col w-full bg-zinc-900 text-zinc-200 pb-12">
-                  ${buildHeader(t[lang].ourStory)}
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-200 pb-6">
                   <div class="w-full">
                     <img src="https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?auto=format&fit=crop&q=80&w=800" alt="Restaurant Interior" class="w-full h-56 object-cover border-b-4 border-red-700" />
                     <div class="p-6 space-y-6">
@@ -435,13 +417,11 @@
                       <p class="leading-relaxed text-zinc-300">
                         ${t[lang].about2} <strong class="text-white">2022</strong>${t[lang].about2b} <strong class="text-white">Fort Myers, Florida</strong>${t[lang].about2c}
                       </p>
-                      
                       <div class="bg-red-900/30 border-l-4 border-red-600 p-5 shadow-inner">
                         <p class="text-red-200 font-bold uppercase tracking-wide">
                           ${t[lang].aboutNew} <span class="text-white">Cape Coral, Florida</span>.
                         </p>
                       </div>
-
                       ${buildSectionTitle(t[lang].qualityTitle, '')}
                       <p class="leading-relaxed text-zinc-300">
                         ${t[lang].qualityText}
@@ -452,21 +432,24 @@
             `;
         }
 
+        // VISTA MENÚ
         function buildMenuView() {
-            // Generar las etiquetas de navegación superior
-            const tagsHtml = menuData.map((section, idx) => `
-                <button onclick="scrollToCategory(${idx})" class="flex-shrink-0 bg-zinc-800 hover:bg-red-700 text-zinc-300 hover:text-white px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-zinc-700 transition shadow-md">
+            const navButtonsHtml = menuData.map((section, idx) => `
+                <button onclick="scrollToCategory(${idx})" class="inline-block px-4 py-2 bg-zinc-900 text-zinc-400 font-black text-[10px] uppercase tracking-widest border border-zinc-700 rounded-full hover:bg-red-700 hover:text-white hover:border-red-600 transition flex-shrink-0 cursor-pointer touch-manipulation">
                     ${section.category[lang]}
                 </button>
-            `).join('');
+            `).join('') + `
+                <button onclick="document.getElementById('order-section').scrollIntoView({ behavior: 'smooth', block: 'start' })" class="inline-block px-4 py-2 bg-red-700 text-white font-black text-[10px] uppercase tracking-widest border border-red-600 rounded-full hover:bg-red-500 transition flex-shrink-0 cursor-pointer touch-manipulation ml-1 shadow-md">
+                    ${lang === 'en' ? 'Ready to Order' : 'Ordenar Aquí'}
+                </button>
+            `;
 
-            const navBarHtml = `
-                <div class="bg-zinc-950/95 backdrop-blur-md border-b border-red-900/50 py-3 px-3 overflow-x-auto hide-scrollbar flex gap-2">
-                    ${tagsHtml}
+            const categoryNavHtml = `
+                <div class="sticky top-0 z-20 bg-zinc-950/95 backdrop-blur-md border-b border-red-900/50 py-3 px-3 shadow-xl overflow-x-auto hide-scrollbar flex gap-2 items-center">
+                    ${navButtonsHtml}
                 </div>
             `;
 
-            // Generar el contenido del menú
             const menuHtml = menuData.map((section, idx) => {
                 let columnsHtml = '';
                 if (section.columns) {
@@ -479,30 +462,17 @@
                 }
 
                 const itemsHtml = section.items.map((item, itemIdx) => {
-                    const pricesHtml = item.prices.map(price => `<span class="w-20 text-right font-black text-red-500">${price}</span>`).join('');
-                    const descHtml = item.desc ? `<span class="text-sm text-zinc-400 mt-1.5 font-medium leading-snug block normal-case">${item.desc[lang]}</span>` : '';
+                    const pricesHtml = item.prices.map(price => `<span class="w-20 text-right font-black ${item.unavailable ? 'text-zinc-600' : 'text-red-500'}">${price}</span>`).join('');
+                    const descHtml = item.desc ? `<span class="text-sm ${item.unavailable ? 'text-zinc-600' : 'text-zinc-400'} mt-1.5 font-medium leading-snug block normal-case">${item.desc[lang]}</span>` : '';
                     
-                    // Si el producto no está disponible, mostrarlo en gris y con etiqueta
-                    if (item.unavailable) {
-                        const badgeHtml = `<span class="inline-block bg-zinc-800 text-red-500 text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-black border border-red-900/50 mt-1">${t[lang].unavailable}</span>`;
-                        return `
-                            <div class="px-2 py-4 flex justify-between items-start opacity-40 grayscale cursor-not-allowed group">
-                              <div class="flex-1 pr-4">
-                                <span class="font-black text-zinc-200 leading-snug uppercase block">${item.name[lang]}</span>
-                                ${badgeHtml}
-                                ${descHtml}
-                              </div>
-                              <div class="flex gap-3 shrink-0 items-start mt-0.5">
-                                ${pricesHtml}
-                              </div>
-                            </div>
-                        `;
-                    }
+                    const unavailableBadge = item.unavailable ? `<span class="text-[9px] bg-red-950 text-red-500 px-2 py-0.5 rounded uppercase tracking-widest ml-2 border border-red-900">Off</span>` : '';
 
                     return `
-                        <div onclick="openModal(${idx}, ${itemIdx})" class="px-2 py-4 flex justify-between items-start hover:bg-zinc-800/60 transition group cursor-pointer">
+                        <div ${item.unavailable ? '' : `onclick="openModal(${idx}, ${itemIdx})"`} class="px-2 py-4 flex justify-between items-start ${item.unavailable ? 'opacity-50 cursor-not-allowed' : 'hover:bg-zinc-800/60 transition group cursor-pointer'}">
                           <div class="flex-1 pr-4">
-                            <span class="font-black text-zinc-200 leading-snug uppercase block group-hover:text-white transition">${item.name[lang]}</span>
+                            <span class="font-black ${item.unavailable ? 'text-zinc-500' : 'text-zinc-200'} leading-snug uppercase flex items-center flex-wrap gap-1 group-hover:${item.unavailable ? 'text-zinc-500' : 'text-white'} transition">
+                                ${item.name[lang]} ${unavailableBadge}
+                            </span>
                             ${descHtml}
                           </div>
                           <div class="flex gap-3 shrink-0 items-start mt-0.5">
@@ -515,19 +485,16 @@
                 const subtitleHtml = section.subtitle ? `<p class="text-red-200 text-xs font-bold uppercase tracking-widest mt-1 leading-snug opacity-90">${section.subtitle[lang]}</p>` : '';
 
                 return `
-                    <div id="category-${idx}" class="mb-10 border-2 border-zinc-800 bg-zinc-900 shadow-2xl scroll-mt-32">
+                    <div id="category-${idx}" class="mb-10 border-2 border-zinc-800 bg-zinc-900 shadow-2xl scroll-mt-20">
                         <div class="relative h-48 w-full border-b-2 border-red-700 bg-zinc-800">
                            <img src="${section.image}" alt="${section.category[lang]}" class="absolute inset-0 w-full h-full object-cover" />
                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent"></div>
                         </div>
-
                         <div class="bg-red-700 text-white px-4 py-3 relative border-b border-red-900 shadow-inner">
                           <h3 class="font-black text-xl uppercase tracking-wider">${section.category[lang]}</h3>
                           ${subtitleHtml}
                         </div>
-
                         ${columnsHtml}
-                        
                         <div class="divide-y divide-zinc-800/80 p-2">
                           ${itemsHtml}
                         </div>
@@ -536,21 +503,15 @@
             }).join('');
 
             return `
-                <div class="flex flex-col w-full bg-zinc-950 text-zinc-100 pb-12 relative">
-                  
-                  <!-- Contenedor estático que une el encabezado y las etiquetas -->
-                  <div class="sticky top-0 z-40 w-full flex flex-col shadow-xl bg-zinc-950">
-                    ${buildHeader(t[lang].ourMenu, false)}
-                    ${navBarHtml}
-                  </div>
-
-                  <div class="px-3 pt-4 pb-6 w-full">
+                <div class="flex flex-col w-full bg-zinc-950 text-zinc-100 pb-6 relative">
+                  ${categoryNavHtml}
+                  <div class="px-3 py-6 w-full">
+                    
                     ${menuHtml}
 
-                    <div class="mt-8 mb-8 px-2 space-y-4">
+                    <div id="order-section" class="mt-8 mb-8 px-2 space-y-4 scroll-mt-20">
                       <div class="w-full h-px bg-zinc-800 mb-6"></div>
                       <h3 class="text-center font-black uppercase tracking-widest text-zinc-400 mb-2">${t[lang].readyToOrder}</h3>
-                      
                       <div class="flex flex-col gap-3">
                         <a href="https://bignicksbbq.toast.site/order/big-nicks-barbecue-fm-9211-cypress-lake-drive" target="_blank" rel="noopener noreferrer" class="w-full bg-red-700 text-white py-4 px-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-red-600 transition shadow-lg border border-red-600">
                           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
@@ -571,20 +532,18 @@
             `;
         }
 
+        // VISTA CATERING
         function buildCateringView() {
             return `
-                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-12">
-                  ${buildHeader(t[lang].catering)}
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-6">
                   <div class="w-full">
                     <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=80" alt="BBQ Platter" class="w-full h-64 object-cover border-b-4 border-amber-600" />
                     <div class="p-6">
                       <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">${t[lang].caterTitle}</h2>
                       <div class="w-16 h-2 bg-amber-600 mb-6"></div>
-                      
                       <p class="text-lg text-zinc-300 leading-relaxed mb-8 font-medium">
                         ${t[lang].caterDesc}
                       </p>
-                      
                       <div class="space-y-6 mb-10">
                         <div class="flex items-start gap-4 bg-zinc-800 p-4 border-l-4 border-red-600">
                           <i data-lucide="truck" class="w-7 h-7 text-red-500 flex-shrink-0"></i>
@@ -601,24 +560,19 @@
                           </div>
                         </div>
                       </div>
-
                       <div class="bg-zinc-950 p-6 border border-zinc-800 text-center relative overflow-hidden">
                         <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);"></div>
-                        
                         <p class="text-zinc-300 font-bold uppercase tracking-widest mb-4 relative z-10">${t[lang].readyToOrder}</p>
-                        
                         <div class="relative z-10 flex flex-col gap-3">
                           <a href="https://www.bignicksbbq.com/cateringrequestform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-amber-600 text-zinc-950 py-4 px-6 font-black uppercase tracking-wider gap-2 hover:bg-amber-500 transition shadow-lg">
                             <i data-lucide="file-text" class="w-6 h-6"></i>
                             ${t[lang].reqForm}
                           </a>
-                          
                           <a href="tel:2392042498" class="inline-flex items-center justify-center w-full bg-transparent border-2 border-zinc-700 text-white py-4 px-6 font-black uppercase tracking-wider gap-2 hover:bg-zinc-800 transition shadow-lg">
                             <i data-lucide="phone" class="w-6 h-6"></i>
                             (239) 204-2498
                           </a>
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -626,15 +580,14 @@
             `;
         }
 
+        // VISTA INFO Y SUCURSALES
         function buildSocialView() {
             return `
-                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-12">
-                  ${buildHeader(t[lang].locations)}
+                <div class="flex flex-col w-full bg-zinc-900 text-zinc-100 pb-6">
                   <div class="px-4 py-6 space-y-8 w-full">
-                    
                     <div>
                       ${buildSectionTitle(t[lang].ourSpots, '<i data-lucide="map-pin" class="inline mr-2 text-red-600"></i>')}
-
+                      
                       <!-- Fort Myers -->
                       <div class="bg-zinc-800 p-5 border-t-4 border-red-700 shadow-xl mb-6 relative overflow-hidden">
                          <div class="absolute top-0 right-0 bg-red-700 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest">${t[lang].est}</div>
@@ -712,59 +665,66 @@
                         </a>
                       </div>
                     </div>
-
                   </div>
                 </div>
             `;
         }
 
-        function buildModal() {
-            if (!selectedItem) return '';
-
-            const pricesHtml = selectedItem.prices.map((price, idx) => {
-                let label = selectedItem.columns ? selectedItem.columns[lang][idx] : 'Price / Precio';
-                label = label.replace('[', '').replace(']', ''); 
-                return `
-                    <div class="flex justify-between items-center bg-zinc-950 p-3 border border-zinc-800">
-                      <span class="text-zinc-500 font-bold uppercase tracking-widest text-xs pr-4 whitespace-pre-line">
-                        ${label}
-                      </span>
-                      <span class="text-red-500 font-black text-xl">${price}</span>
-                    </div>
-                `;
-            }).join('');
-
-            const descHtml = selectedItem.desc ? `<p class="text-zinc-300 text-sm mb-6 leading-relaxed font-medium">${selectedItem.desc[lang]}</p>` : '';
-
+        // VENTANA FLOTANTE (Modal HTML estático que se inyecta oculto)
+        function buildStaticModal() {
             return `
-                <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onclick="closeModal()">
+                <div id="item-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onclick="closeModal()">
                   <div class="bg-zinc-900 border border-zinc-700 w-full max-w-sm overflow-y-auto shadow-2xl relative animate-modal max-h-[95vh]" onclick="event.stopPropagation()">
                     <button onclick="closeModal()" class="absolute top-3 right-3 z-20 bg-black/60 p-1.5 rounded-full text-white hover:bg-red-600 transition">
                       <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
-                    
                     <div class="h-56 w-full relative border-b-2 border-red-700 flex-shrink-0">
-                      <img src="${selectedItem.displayImage}" alt="${selectedItem.name[lang]}" class="w-full h-full object-cover" />
+                      <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
                       <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent"></div>
                     </div>
-                    
                     <div class="p-6 relative -mt-8 z-10">
-                      <h3 class="text-2xl font-black text-white uppercase tracking-wider mb-2 leading-tight drop-shadow-md">
-                        ${selectedItem.name[lang]}
+                      <h3 id="modal-title" class="text-2xl font-black text-white uppercase tracking-wider mb-2 leading-tight drop-shadow-md">
                       </h3>
-                      
-                      ${descHtml}
-
-                      <div class="space-y-3 mb-6">
-                        ${pricesHtml}
-                      </div>
-
-                      <button onclick="closeModal()" class="w-full bg-zinc-800 text-white py-3 font-black uppercase tracking-widest border border-zinc-700 hover:bg-zinc-700 transition">
-                        ${t[lang].backToMenu}
+                      <div id="modal-desc"></div>
+                      <div id="modal-prices" class="space-y-3 mb-6"></div>
+                      <button id="modal-back-btn" onclick="closeModal()" class="w-full bg-zinc-800 text-white py-3 font-black uppercase tracking-widest border border-zinc-700 hover:bg-zinc-700 transition">
                       </button>
                     </div>
                   </div>
                 </div>
+            `;
+        }
+
+        // --- LA BARRA INFERIOR ---
+        function buildBottomNav() {
+            const navItems = [
+                { id: 'home', icon: 'home', text: { en: 'Home', es: 'Inicio' } },
+                { id: 'menu', icon: 'utensils', text: { en: 'Menu', es: 'Menú' } },
+                { id: 'about', icon: 'flame', text: { en: 'Story', es: 'Historia' } },
+                { id: 'catering', icon: 'truck', text: { en: 'Cater', es: 'Eventos' } },
+                { id: 'social', icon: 'map-pin', text: { en: 'Info', es: 'Info' } }
+            ];
+
+            const buttonsHtml = navItems.map(item => {
+                const isActive = currentView === item.id;
+                // Colores si está activo o inactivo
+                const activeTextColor = isActive ? 'text-red-500' : 'text-zinc-500';
+                
+                return `
+                    <button type="button" onclick="setView('${item.id}')" class="w-full h-full flex flex-col items-center justify-center pt-2 pb-1 transition-transform active:scale-95 cursor-pointer touch-manipulation">
+                        <i data-lucide="${item.icon}" class="w-6 h-6 mb-1 ${activeTextColor}"></i>
+                        <span class="text-[9px] font-black uppercase tracking-wider ${activeTextColor}">${item.text[lang]}</span>
+                        <div class="h-1 w-1 rounded-full mt-1 ${isActive ? 'bg-red-500' : 'bg-transparent'}"></div>
+                    </button>
+                `;
+            }).join('');
+
+            return `
+                <nav class="flex-shrink-0 w-full bg-zinc-950 border-t border-zinc-900 pb-safe z-50 relative shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+                    <div class="grid grid-cols-5 h-16 w-full">
+                        ${buttonsHtml}
+                    </div>
+                </nav>
             `;
         }
 
@@ -773,6 +733,7 @@
             const root = document.getElementById('root');
             let content = '';
 
+            // Generar el contenido según la vista actual
             switch (currentView) {
                 case 'home': content = buildHomeView(); break;
                 case 'about': content = buildAboutView(); break;
@@ -783,24 +744,47 @@
 
             const currentYear = new Date().getFullYear();
 
-            // NOTA: Se eliminó el "overflow-x-hidden" de este div para que el sticky funcione correctamente.
+            // Aquí construimos el "Cascarón" fijo de la App
             root.innerHTML = `
-                <div class="w-full max-w-md bg-zinc-950 shadow-2xl relative border-x border-zinc-900 flex flex-col min-h-screen mx-auto">
-                  <div class="flex-1 flex flex-col w-full">
+                <div class="w-full max-w-md bg-zinc-950 shadow-2xl relative flex flex-col h-[100dvh] mx-auto overflow-hidden border-x border-zinc-900">
+                  
+                  <!-- ENCABEZADO FIJO -->
+                  <div class="flex-shrink-0 sticky top-0 bg-zinc-950 shadow-md border-b-2 border-red-700 z-30 px-4 py-4 flex items-center justify-between">
+                    <div class="flex items-center flex-1 overflow-hidden pr-2">
+                      ${currentView !== 'home' ? `
+                      <button onclick="setView('home')" class="p-2 -ml-2 rounded hover:bg-zinc-800 text-zinc-100 transition active:scale-90 mr-1 flex-shrink-0">
+                        <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                      </button>
+                      ` : ''}
+                      <h1 class="text-xl font-black text-zinc-100 tracking-widest uppercase truncate">${getHeaderTitle()}</h1>
+                    </div>
+                    <div class="flex bg-zinc-900 border border-zinc-700 rounded-full overflow-hidden shadow-inner flex-shrink-0">
+                      <button onclick="setLanguage('en')" class="px-2 py-1 text-[10px] font-black tracking-widest transition ${lang === 'en' ? 'bg-red-700 text-white' : 'text-zinc-500'}">EN</button>
+                      <button onclick="setLanguage('es')" class="px-2 py-1 text-[10px] font-black tracking-widest transition ${lang === 'es' ? 'bg-amber-600 text-zinc-900' : 'text-zinc-500'}">ES</button>
+                    </div>
+                  </div>
+
+                  <!-- CONTENIDO DESLIZABLE (Donde ocurre la magia) -->
+                  <div class="flex-1 overflow-y-auto scroll-smooth hide-scrollbar bg-zinc-900" id="main-scroll">
                     ${content}
+                    
+                    <!-- Pie de página legal -->
+                    <div class="w-full bg-zinc-950 py-6 border-t border-zinc-900 flex justify-center items-center">
+                      <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center">
+                        &copy; ${currentYear} Big Nick's BBQ.<br />${t[lang].rights}
+                      </p>
+                    </div>
                   </div>
                   
-                  <!-- Legal Footer -->
-                  <div class="w-full bg-zinc-950 py-6 border-t border-zinc-900 flex justify-center items-center mt-auto">
-                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center">
-                      &copy; ${currentYear} Big Nick's BBQ.<br />${t[lang].rights}
-                    </p>
-                  </div>
+                  <!-- BARRA DE NAVEGACIÓN INFERIOR TIPO APP -->
+                  ${buildBottomNav()}
+
                 </div>
-                ${buildModal()}
+                <!-- Renderiza el Modal Estático de forma oculta -->
+                ${buildStaticModal()}
             `;
 
-            // Re-inicializa los íconos cada vez que se inyecta nuevo HTML
+            // Re-inicializa los íconos
             lucide.createIcons();
         }
 
